@@ -1,7 +1,7 @@
 // Mrs Eman Alphabet - offline support.
 // On first open the whole site (pages, pictures, sounds, videos) is saved on the device,
 // so every map, game and worksheet opens later without internet.
-const CACHE='alphabet-world-v126';
+const CACHE='alphabet-world-v127';
 const FONTS='alphabet-fonts-1';
 const FILES='alphabet-files-1'; // pictures in /a/ never change their name, so they are kept across updates
 const isShared=p=>p.startsWith('/a/');

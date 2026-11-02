@@ -51,7 +51,9 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 function show(m,e){const el=document.getElementById('msg');el.style.display='';el.innerHTML='<span class="e">'+e+'</span>'+m}
 function render(rows){const Q=new Map();
  rows.forEach(r=>{if(r.length<3)return;const name=(r[0]||'').trim(),cls=(r[1]||'').trim(),mm=String(r[2]||'').match(/(\d)/);if(!name||!mm)return;const n=+mm[1];if(n<1||n>5)return;
-  const k=name.toLowerCase().replace(/\s+/g,' ')+'|'+cls;if(!Q.has(k))Q.set(k,{name,cls,maps:new Set()});Q.get(k).maps.add(n)});
+  const ok=r.length<4||/^(true|1|yes|✓|✅)$/i.test(String(r[3]).trim());
+  const k=name.toLowerCase().replace(/\s+/g,' ')+'|'+cls;if(!Q.has(k))Q.set(k,{name,cls,maps:new Set(),ok:false});const q=Q.get(k);q.maps.add(n);if(ok)q.ok=true});
+ for(const [k,q] of Q)if(!q.ok)Q.delete(k);
  const L=[...Q.values()].sort((a,b)=>b.maps.size-a.maps.size||a.name.localeCompare(b.name));
  if(!L.length){const el=document.getElementById('msg');el.className='noq';el.style.display='';el.innerHTML='<img alt="No queens yet – finish a map and be the first!" src="a/229f959d6f25c3.webp">';return}
  document.getElementById('msg').style.display='none';
