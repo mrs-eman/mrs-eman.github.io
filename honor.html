@@ -40,7 +40,7 @@ header{position:relative;z-index:2;text-align:center;padding-top:16px}
 <a class="home" href="index.html" aria-label="Back to home"><img alt="" src="a/be461e6dc7afe3.webp"></a>
 <header><img class="htl" alt="Alphabet Queens – Every crown is a map you finished. Well done, girls!" src="a/94c5f3fb98d53d.webp"></header>
 <div id="board" aria-live="polite"></div>
-<div class="msg" id="msg"><span class="e">⏳</span>Loading…</div>
+<div class="noq" id="msg"><img alt="Loading…" src="a/283b74bd5cdd35.webp" style="width:min(80vw,460px);animation:ldB 1.4s ease-in-out infinite"></div><style>@keyframes ldB{50%{transform:scale(1.04)}}</style>
 <script>
 const CSV="https://docs.google.com/spreadsheets/d/e/2PACX-1vRctLL8FqqMFlJ-tNUlgpePo6SoM3Giv2DzDt2gcFbmxKZT6FTVzUDCXaQMxBrAJhGWvou6RFDk8DoP/pub?gid=1892810059&single=true&output=csv";const NUMS="a/4e33ef0ada1acd.webp",GR={"1": "a/e3a346d5923264.webp", "2": "a/86da49094bedb2.webp", "3": "a/79bf4f6dfc2dc4.webp", "4": "a/faa2d51c77ec14.webp", "5": "a/8189266620adb3.webp"};const SX={1:16.146,2:33.464,3:49.935,4:66.471,5:83.138},SY=64.844;
 function fitNames(){document.querySelectorAll('.q .nm,.q .cl').forEach(e=>{e.style.fontSize='';const q=e.parentElement,mw=q.clientWidth*(e.classList.contains("cl")?.3:.33);let f=parseFloat(getComputedStyle(e).fontSize);let k=0;while(e.scrollWidth>mw&&f>8&&k<40){f*=.94;e.style.fontSize=f+'px';k++}})}
@@ -48,7 +48,7 @@ addEventListener('resize',fitNames);const CR={"1": "a/1ad164a1fb0144.webp", "2":
 for(let i=0;i<0;i++){const c=document.createElement('div');c.className='cloud';const w=90+Math.random()*90;c.style.cssText+='width:'+w+'px;height:'+w*.36+'px;top:'+(6+Math.random()*40)+'vh;animation-duration:'+(45+Math.random()*30)+'s;animation-delay:-'+Math.random()*45+'s';document.body.prepend(c)}
 function parse(t){const R=[];let row=[],f='',q=false;for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}else if(c=='"')q=true;else if(c==','){row.push(f);f=''}else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(f);R.push(row);row=[];f=''}else f+=c}if(f||row.length){row.push(f);R.push(row)}return R}
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function show(m,e){const el=document.getElementById('msg');el.style.display='';el.innerHTML='<span class="e">'+e+'</span>'+m}
+function show(m,e){const el=document.getElementById('msg');el.className='msg';el.style.display='';el.innerHTML='<span class="e">'+e+'</span>'+m}
 function render(rows){const Q=new Map();
  rows.forEach(r=>{if(r.length<3)return;const name=(r[0]||'').trim(),cls=(r[1]||'').trim(),mm=String(r[2]||'').match(/(\d)/);if(!name||!mm)return;const n=+mm[1];if(n<1||n>5)return;
   const ok=r.length<4||/^(true|1|yes|✓|✅)$/i.test(String(r[3]).trim());
