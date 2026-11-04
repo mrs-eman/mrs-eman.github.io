@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.mrseman.alphabetworld",
+        "sha256_cert_fingerprints": ["19:6C:71:52:97:1F:C7:14:63:EF:53:57:45:C8:BE:66:BF:40:C6:94:36:A5:FD:3B:0C:40:EF:46:37:5F:18:F0"]
+      }
+    }]
