@@ -1,5 +1,5 @@
 {
-  "name": "Mrs Eman Alphabet",
+  "name": "Mrs Eman's Alphabet World",
   "short_name": "Mrs Eman Alphabet",
   "start_url": "/index.html",
   "scope": "/",
@@ -24,5 +24,12 @@
       "type": "image/png",
       "purpose": "maskable"
     }
+  ],
+  "id": "/",
+  "description": "Fun English phonics for Grade 1: learn letters, sounds, words and sentences with games and interactive worksheets.",
+  "lang": "en",
+  "categories": [
+    "education",
+    "kids"
   ]
 }
