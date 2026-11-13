@@ -34,7 +34,7 @@
 #intro .skip{width:clamp(110px,18vw,170px)}
 #introAgain{width:min(300px,62%);margin:16px auto 6px;animation:tapPulse 2.2s ease-in-out infinite}
 #introAgain:active{transform:scale(.94)!important;box-shadow:none!important}
-</style><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>.cb img{object-fit:contain;transform:scale(1.18)}.card.c1 .cb img{transform:scale(1.0)}</style><script>(function(){function fix(){var g=document.getElementById('garden');if(!g)return;var m=getComputedStyle(g).transform,sc=1;if(m&&m!=='none'){sc=parseFloat(m.split('(')[1])||1}var vw=(g.parentNode||document.body).clientWidth||innerWidth;var dx=Math.min(0,vw/2-585*sc);g.style.marginLeft=dx+'px'}addEventListener('resize',function(){setTimeout(fix,60)});addEventListener('orientationchange',function(){setTimeout(fix,300)});addEventListener('load',fix);setTimeout(fix,50);setTimeout(fix,500);setInterval(fix,2000)})();</script></head><body><div id="intro" role="dialog" aria-label="Welcome" hidden>
+</style><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>.cb img{object-fit:contain;transform:scale(1.18)}.card.c1 .cb img{transform:scale(1.0)}</style><script>(function(){function fix(){var g=document.getElementById('garden');if(!g)return;var m=getComputedStyle(g).transform,sc=1;if(m&&m!=='none'){sc=parseFloat(m.split('(')[1])||1}var vw=(g.parentNode||document.body).clientWidth||innerWidth;var dx=Math.min(0,vw/2-585*sc);g.style.marginLeft=dx+'px'}addEventListener('resize',function(){setTimeout(fix,60)});addEventListener('orientationchange',function(){setTimeout(fix,300)});addEventListener('load',fix);setTimeout(fix,50);setTimeout(fix,500);setInterval(fix,2000)})();</script><style>@supports (height:100lvh){#bgwrap{bottom:auto!important;height:calc(100lvh + 260px)}}</style></head><body><div id="intro" role="dialog" aria-label="Welcome" hidden>
  <video playsinline webkit-playsinline preload="auto" poster="intro_poster.jpg"><source src="intro.mp4" type="video/mp4"><source src="intro.webm" type="video/webm"></video>
  <button class="tap" type="button" aria-label="Tap for sound"><img src="btn_sound.webp" alt=""></button>
  <button class="skip" type="button" aria-label="Skip"><img src="btn_skip.webp" alt=""></button>
@@ -60,7 +60,7 @@
 })();
 </script>
 
-<title>My Alphabet</title>
+<title>Mrs Eman's Alphabet World</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Comic+Neue:wght@700&display=swap">
@@ -229,17 +229,38 @@ async function startGarden(){if(gStarted)return;gStarted=true;try{const b=atob(A
   const buf=await new Promise((r,j)=>ac.decodeAudioData(u.buffer,r,j));const s=ac.createBufferSource();s.buffer=buf;s.loop=true;gg=ac.createGain();gg.gain.value=talking?G_DUCK:G_LO;s.connect(gg);gg.connect(ac.destination);s.start();}catch(e){gStarted=false}}
 function duck(on){if(gg)gg.gain.setTargetAtTime(on?G_DUCK:G_LO,ac.currentTime,.25)}
 async function twk(){try{if(!tbuf){const b=atob(A.s_twinkle.split(',')[1]),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);tbuf=await new Promise((r,j)=>ac.decodeAudioData(u.buffer,r,j));}const t=ac.createBufferSource();t.buffer=tbuf;t.connect(ac.destination);t.start(ac.currentTime+.08);}catch(e){}}
-async function hello(){try{
+let welcomed=false,saying=false;
+try{welcomed=sessionStorage.getItem('mea-welcomed')==='1'}catch(e){try{const r=document.referrer;if(r&&new URL(r).origin===location.origin)welcomed=true}catch(_){}}
+window.__welcomeOn=!welcomed;
+const nap=t=>new Promise(r=>setTimeout(r,t));
+function markWelcomed(){welcomed=true;window.__welcomeOn=false;try{sessionStorage.setItem('mea-welcomed','1')}catch(e){}}
+function gardenOnly(){try{if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();if(ac.state!=='running')ac.resume();startGarden()}catch(e){}}
+/* the welcome is over: now (and only now) the garden and waterfall sounds come in */
+function welcomeDone(){markWelcomed();gardenOnly();try{window.__gardenGo&&window.__gardenGo()}catch(e){}}
+/* any tap (also the buttons on the intro video) unlocks sound, so the girl can speak by herself when the video ends */
+function unlock(e){try{if(e&&e.target&&e.target.closest&&e.target.closest('a,.cb'))return;if(!ac)ac=new (window.AudioContext||window.webkitAudioContext)();if(ac.state!=='running')ac.resume()}catch(_){}}
+['pointerup','touchend','click','keydown'].forEach(ev=>addEventListener(ev,unlock,{capture:true}));
+async function hello(){if(saying||welcomed)return;saying=true;try{
   if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();}
-  await ac.resume();startGarden();
+  await ac.resume();
   if(!buf){const b=atob(A.choose_map.split(',')[1]),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);
     buf=await new Promise((r,j)=>ac.decodeAudioData(u.buffer,r,j));}
-  if(src){try{src.stop()}catch(e){}}
   src=ac.createBufferSource();src.buffer=buf;if(!an){an=ac.createAnalyser();an.fftSize=1024;an.connect(ac.destination);}src.connect(an);src.start();played=true;
-  const g=document.querySelector('.gwrap');g.classList.add('talk');talking=true;const my=++hv;duck(true);src.onended=()=>{g.classList.remove('talk');talking=false;if(my===hv){twk();setTimeout(()=>duck(false),1200)}};
-}catch(e){}}
+  const g=document.querySelector('.gwrap');g.classList.add('talk');talking=true;
+  src.onended=()=>{g.classList.remove('talk');talking=false;saying=false;twk();setTimeout(welcomeDone,700)};
+}catch(e){saying=false;welcomeDone()}}
 document.getElementById('hello').addEventListener('click',hello);
-addEventListener('pointerdown',e=>{if(e.target.closest('a,.cb')){try{if(src)src.stop()}catch(_){}try{ac&&ac.suspend()}catch(_){}return}if(!played&&!window.__surpriseOn&&!e.target.closest('#hello'))hello();},{capture:true});
+addEventListener('pointerdown',e=>{if(e.target.closest('a,.cb')){try{if(src)src.stop()}catch(_){}try{ac&&ac.suspend()}catch(_){}return}
+  if(window.__surpriseOn||e.target.closest('#hello'))return;
+  if(welcomed)gardenOnly();else hello();},{capture:true});
+/* first visit: wait for the intro video to close, then the girl says the welcome on her own */
+(async function(){if(welcomed)return;
+  for(let i=0;i<2400&&window.__introOn;i++)await nap(250);
+  if(window.__surpriseOn){markWelcomed();return}
+  await nap(350);if(saying||welcomed)return;
+  unlock();for(let i=0;i<8&&!(ac&&ac.state==='running');i++)await nap(150);
+  if(ac&&ac.state==='running')hello();   /* otherwise the browser wants a tap first: she speaks on the first tap */
+})();
 </script>
 
 <style>#garden .bfl{transform-origin:50% 150%!important;animation:gsw ease-in-out infinite alternate!important}@keyframes gsw{from{transform:rotate(-10deg) scale(.95)}to{transform:rotate(10deg) scale(1.1)}}</style>
@@ -453,13 +474,21 @@ function surprise(){return new Promise(res=>{
  ov.addEventListener('pointerup',go);ov.addEventListener('click',go);ov.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go(e)});
 })}
 /* garden ambience on the home page: starts on the first tap, pauses during the intro video and the crown celebration */
-(function(){let G=null,on=false;function ok(){return !window.__introOn&&!window.__surpriseOn&&document.visibilityState==='visible'}
- function make(){if(G)return;G=new Audio('garden_home.mp3');G.loop=true;G.preload='auto';G.volume=1}
- function start(){make();if(!ok())return;const p=G.play();on=true;if(p&&p.catch)p.catch(()=>{on=false})}
+(function(){let G=null,on=false,primed=false,fv=null;
+ function ok(){return !window.__introOn&&!window.__surpriseOn&&!window.__welcomeOn&&document.visibilityState==='visible'}
+ function make(){if(G)return;G=new Audio('garden_home.mp3');G.loop=true;G.preload='auto'}
+ function fade(){clearInterval(fv);let k=0;try{G.volume=0}catch(e){}fv=setInterval(()=>{k++;try{G.volume=Math.min(1,k/15)}catch(e){}if(k>=15)clearInterval(fv)},100)}
+ function start(){make();if(on||!ok())return;on=true;G.muted=false;fade();const p=G.play();if(p&&p.catch)p.catch(()=>{on=false})}
+ /* a tap lets the browser play this sound later (needed on iPad/iPhone) without it being heard yet */
+ function prime(){make();if(primed||on)return;primed=true;G.muted=true;const p=G.play();
+  if(p&&p.then)p.then(()=>{if(!on){G.pause();try{G.currentTime=0}catch(e){}}G.muted=false}).catch(()=>{primed=false;G.muted=false});else{if(!on)G.pause();G.muted=false}}
+ window.__gardenGo=start;
  addEventListener('pointerdown',()=>{if(!on)start()},{capture:true});
+ ['pointerup','touchend','click'].forEach(ev=>addEventListener(ev,e=>{if(e.target.closest&&e.target.closest('a,.cb'))return;if(on)return;if(ok())start();else prime()},{capture:true}));
  setInterval(()=>{if(!G||!on)return;if(ok()){if(G.paused){const p=G.play();if(p&&p.catch)p.catch(()=>{})}}else if(!G.paused)G.pause()},500);
  addEventListener('pagehide',()=>{try{G&&G.pause()}catch(e){}});
- document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('a,.cb')){try{G&&G.pause()}catch(_){}}},{capture:true});})();
+ document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('a,.cb')){try{G&&G.pause()}catch(_){}}},{capture:true});
+ setTimeout(()=>{if(!on)start()},400);})();
 if(CQ.length){window.__surpriseOn=true;(async()=>{await waitIntro();await sleep(500);await surprise();for(const q of CQ)await celebrate(q);window.__surpriseOn=false})()}
 })();
 </script>
