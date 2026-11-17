@@ -55,9 +55,9 @@ button:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-d)}
 <p class="ar lead">اعملي رابطاً خاصاً لطالباتك، فتصل علاماتهن إلى Google Sheet الخاص بك.</p>
 <section class="sec s1"><h2 class="sh"><b>1</b><span>Make your Google Form</span></h2><div class="sb"><img class="ic" src="a/fb071e591d4cad.webp" alt=""><div class="sc"><p class="ar">اعملي Google Form فيه 5 أسئلة من نوع Short answer بهذا الترتيب بالضبط:</p>
 <ol class="chips"><li>1. Name</li><li>2. Class</li><li>3. Map</li><li>4. Game</li><li>5. Stars</li></ol></div></div><p class="ar tip"><span class="gear">⚙️</span><span>من الإعدادات (Settings ← Responses): لا تطلبي تسجيل الدخول، ولا تجمعي الإيميلات. ومن تبويب Responses اضغطي <b>Link to Sheets</b> حتى تنزل العلامات في Google Sheet.</span></p></section>
-<section class="sec s2"><h2 class="sh"><b>2</b><span>Copy the pre-filled link</span></h2><div class="sb"><img class="ic" src="a/671d8780debd8d.webp" alt=""><div class="sc"><p class="ar">من النقاط الثلاث ⋮ اختاري <b>Get pre-filled link</b>، واكتبي في الأسئلة الخمسة هذه الكلمات:</p>
+<section class="sec s2"><h2 class="sh"><b>2</b><span>Copy the pre-filled link</span></h2><div class="sb"><img class="ic" src="a/671d8780debd8d.webp" alt=""><div class="sc"><p class="ar">من النقاط الثلاث ⋮ اختاري <b>Pre-fill form</b>، واكتبي في الأسئلة الخمسة هذه الكلمات:</p>
 <p class="chips2"><code>NAME</code> <code>CLASS</code> <code>MAP</code> <code>GAME</code> <code>STARS</code></p>
-<p class="ar">ثم اضغطي Get link ← Copy link، والصقيه هنا:</p></div></div><textarea id="pre" placeholder="https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123=NAME..."></textarea>
+<p class="ar">ثم اضغطي Get link ← COPY LINK، والصقيه هنا:</p></div></div><textarea id="pre" placeholder="https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123=NAME..."></textarea>
 <p class="ar" style="margin-top:12px">اسمك (يظهر لك فقط هنا):</p>
 <input id="tname" maxlength="40" placeholder="Ms ..." autocomplete="off">
 <div class="row c"><button id="make" class="green" type="button">🔗 Make my class link</button></div>
@@ -93,7 +93,7 @@ setTimeout(()=>$('#pinIn').focus(),200);
 const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 let CUR=null;
 function parse(u){
-  u=u.trim();const m=u.match(/forms\/d\/e\/([A-Za-z0-9_-]{20,})\//);if(!m)return {err:'هذا ليس رابط Google Form الصحيح. انسخي الرابط من Get pre-filled link.'};
+  u=u.trim();const m=u.match(/forms\/d\/e\/([A-Za-z0-9_-]{20,})\//);if(!m)return {err:'هذا ليس رابط Google Form الصحيح. انسخي الرابط من Pre-fill form.'};
   let q;try{q=new URL(u).searchParams}catch(e){return {err:'الرابط غير مكتمل.'}}
   const ent=[];q.forEach((v,k)=>{if(/^entry\.\d+$/.test(k))ent.push([k,v.trim().toUpperCase()])});
   if(ent.length<5)return {err:'لازم تكتبي الكلمات الخمس في الأسئلة الخمسة قبل ما تنسخي الرابط.'};
@@ -172,4 +172,6 @@ button{font-size:21px}
 @media (max-width:560px){.sb{flex-direction:column}.ic{width:120px}.qrim{display:none}.sh span{font-size:17px;padding:5px 14px 5px 22px}.sh b{width:46px;height:46px;font-size:24px}.frame{padding:22px 10px}}
 @media print{#gbg,.th,.ic,.qrim{display:none}.frame{border:0;box-shadow:none;background:#fff}.frame::before{display:none}}
 </style>
+<style id="printfix">@media print{body.pc>main#main{display:block!important;max-width:none;margin:0}html{background:#fff!important}body.pc #gbg,body.pc #pin,body.pc .th,body.pc .frame{display:none!important}}</style>
+<script>addEventListener("afterprint",function(){document.body.classList.remove("pc")})</script>
 </body></html>
