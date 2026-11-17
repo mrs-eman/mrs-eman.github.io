@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head><script id="appnosend">(function(){try{var a=false;try{a=sessionStorage.getItem("mea-app")==="1"}catch(e){}if(!a&&(/[?&]twa=1/.test(location.search)||(document.referrer||"").indexOf("android-app:")===0)){a=true;try{sessionStorage.setItem("mea-app","1")}catch(e){}}if(!a)return;document.documentElement.classList.add("appmode");var g=Storage.prototype.getItem;Storage.prototype.getItem=function(k){if(k==="ma-teacher"||k==="ma-queue")return k==="ma-queue"?"[]":null;return g.call(this,k)};var s=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(k==="ma-teacher"||k==="ma-student"||k==="ma-queue")return;return s.call(this,k,v)};var st=document.createElement("style");st.textContent='html.appmode a[href*="honor"],html.appmode a[href*="teacher"]{display:none!important}';document.head.appendChild(st)}catch(e){}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Letter Friends</title><script>(function(){try{var ok=localStorage.getItem("mea-unlock")==="1"||localStorage.getItem("mea-twa")==="1"||/[?&]twa=1/.test(location.search)||(document.referrer||"").indexOf("android-app://")===0;if(!ok)location.replace("index.html")}catch(e){}})();</script>
@@ -279,5 +279,7 @@ renderHome();
 })();
 </script>
 <style id="h2c">.head2>img{transform:translateX(-10%)}</style>
+<style id="girlsnd">.hh,.head2{position:relative;z-index:6}.hh img,.head2>img{cursor:pointer}.girlhop{animation:ghop .5s ease}@keyframes ghop{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}.head2>img.girlhop{animation:ghop2 .5s ease}@keyframes ghop2{0%,100%{transform:translateX(-10%)}40%{transform:translateX(-10%) translateY(-8px)}}@media (prefers-reduced-motion:reduce){.girlhop{animation:none!important}}</style>
+<script>(function(){var A=new Audio("a/79ced820671e9c.mp3");A.preload="auto";function play(e){var im=e.currentTarget;try{A.currentTime=0;var p=A.play();if(p&&p.catch)p.catch(function(){})}catch(_){}im.classList.remove("girlhop");void im.offsetWidth;im.classList.add("girlhop")}document.querySelectorAll(".hh img,.head2>img").forEach(function(im){im.addEventListener("click",play)})})();</script>
 </body>
 </html>
