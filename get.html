@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Get Mrs Eman's Alphabet World</title>
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#ff4f93">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Arabic",sans-serif;background:linear-gradient(180deg,#8fd3ff 0%,#dff4ff 55%,#c9f2b8 100%);color:#3a2350;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{background:#fff;border-radius:28px;max-width:440px;width:100%;padding:26px 22px 22px;text-align:center;box-shadow:0 14px 40px rgba(90,40,120,.22);border:4px solid #ffd3e6}
+.icon{width:112px;height:112px;border-radius:26px;box-shadow:0 6px 16px rgba(255,79,147,.35)}
+h1{font-size:23px;margin:14px 0 4px;color:#e83e8c;line-height:1.25}
+.sub{font-size:15px;margin:0 0 18px;color:#6b5580}
+.btn{display:block;width:100%;border:0;border-radius:18px;padding:16px 14px;font-size:19px;font-weight:800;color:#fff;background:#ff4f93;text-decoration:none;cursor:pointer;box-shadow:0 6px 0 #d63a78;margin:0 0 16px;font-family:inherit}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #d63a78}
+.btn.alt{background:#3aa0ff;box-shadow:0 6px 0 #2b7fd0}
+.btn small{display:block;font-size:14px;font-weight:600;opacity:.95;margin-top:2px}
+.steps{text-align:start;background:#fff6fa;border-radius:18px;padding:14px 16px;margin:4px 0 0;font-size:15px;line-height:1.55}
+.steps b{color:#e83e8c}
+.steps ol{margin:6px 0 0;padding-inline-start:22px}
+.steps[dir=rtl]{margin-top:10px}
+.link{display:inline-block;margin-top:14px;font-size:14px;color:#6b5580}
+.note{font-size:14px;color:#6b5580;margin:0 0 14px}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<main class="card">
+  <img class="icon" src="icon-192.png" alt="">
+  <h1>Mrs Eman's Alphabet World</h1>
+  <p class="sub">Fun English phonics for Grade 1<br><span dir="rtl" lang="ar">تعلّم الحروف الإنجليزية وأصواتها بالمرح</span></p>
+
+  <!-- Android -->
+  <section id="android" class="hide">
+    <p class="note" id="aNote">Opening Google Play… <span dir="rtl" lang="ar">جارٍ فتح جوجل بلاي…</span></p>
+    <a class="btn" id="playBtn" href="https://play.google.com/store/apps/details?id=com.mrseman.alphabetworld">Get the app on Google Play<small dir="rtl" lang="ar">نزّلي التطبيق من جوجل بلاي</small></a>
+  </section>
+
+  <!-- iPhone / iPad -->
+  <section id="ios" class="hide">
+    <button class="btn" type="button" data-open>Open Alphabet World<small dir="rtl" lang="ar">افتحي عالم الحروف</small></button>
+    <div class="steps" lang="en">
+      <b>To keep it on your iPhone or iPad like an app:</b>
+      <ol>
+        <li>Open it in <b>Safari</b>.</li>
+        <li>Tap the <b>Share</b> button.</li>
+        <li>Choose <b>Add to Home Screen</b>.</li>
+      </ol>
+    </div>
+    <div class="steps" dir="rtl" lang="ar">
+      <b>لحفظه على الآيفون أو الآيباد مثل التطبيق:</b>
+      <ol>
+        <li>افتحيه في متصفح <b>Safari</b>.</li>
+        <li>اضغطي زر <b>المشاركة</b>.</li>
+        <li>اختاري <b>إضافة إلى الشاشة الرئيسية</b>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Computer or anything else -->
+  <section id="other" class="hide">
+    <button class="btn" type="button" data-open>Open in the browser<small dir="rtl" lang="ar">افتحيه في المتصفح</small></button>
+    <a class="btn alt" href="https://play.google.com/store/apps/details?id=com.mrseman.alphabetworld">Android app on Google Play<small dir="rtl" lang="ar">تطبيق أندرويد على جوجل بلاي</small></a>
+  </section>
+</main>
+<script>
+(function(){
+  var PLAY='https://play.google.com/store/apps/details?id=com.mrseman.alphabetworld';
+  var ua=navigator.userAgent||'';
+  var isAndroid=/Android/i.test(ua);
+  var isIOS=/iPhone|iPad|iPod/i.test(ua)||(/Macintosh/i.test(ua)&&navigator.maxTouchPoints>1);
+  function show(id){document.getElementById(id).classList.remove('hide')}
+  /* visitors who come from this page may enter the site directly */
+  function openSite(){try{localStorage.setItem('mea-unlock','1')}catch(e){}location.href='index.html'}
+  [].forEach.call(document.querySelectorAll('[data-open]'),function(b){b.addEventListener('click',openSite)});
+  if(isAndroid){show('android');setTimeout(function(){location.href=PLAY},900)}
+  else if(isIOS){show('ios')}
+  else{show('other')}
+})();
+</script>
+</body>
+</html>

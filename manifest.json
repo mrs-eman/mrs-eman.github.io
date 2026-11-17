@@ -1,7 +1,7 @@
 {
   "name": "Mrs Eman's Alphabet World",
   "short_name": "Mrs Eman Alphabet",
-  "start_url": "/index.html",
+  "start_url": "/index.html?twa=1",
   "scope": "/",
   "display": "fullscreen",
   "orientation": "landscape",
