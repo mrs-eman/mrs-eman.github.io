@@ -30,6 +30,7 @@ button:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-d)}
 [hidden]{display:none!important}
 @media print{body{background:#fff}.card{box-shadow:none}.noprint{display:none!important}#out{display:block}}
 </style></head><body>
+<div id="gbg" aria-hidden="true"><img alt="" src="a/b6809d42593356.webp" style="left:1.7%;top:2.0%;width:max(41.3vw,206px);animation-duration:16s;animation-delay:-0s"><img alt="" src="a/6acac1a7f90bbc.webp" style="left:67.6%;top:1.0%;width:max(30.1vw,150px);animation-duration:21s;animation-delay:-4s"><img alt="" src="a/6c87ddc3e68087.webp" style="left:52.0%;top:25.2%;width:max(25.5vw,128px);animation-duration:26s;animation-delay:-8s"><img alt="" src="a/f531862806b4df.webp" style="left:11.6%;top:39.8%;width:max(24.5vw,122px);animation-duration:31s;animation-delay:-12s"><img alt="" src="a/33020c65c96ec5.webp" style="left:75.3%;top:44.0%;width:max(20.2vw,101px);animation-duration:36s;animation-delay:-16s"><img alt="" src="a/68ccf32a3d1564.webp" style="left:78.7%;top:15.9%;width:max(19.1vw,96px);animation-duration:41s;animation-delay:-20s"><img alt="" src="a/db49a977dcd85d.webp" style="left:61.7%;top:57.0%;width:max(11.8vw,59px);animation-duration:46s;animation-delay:-24s"></div>
 
 <style>#cardsBox{margin-top:26px;padding-top:18px;border-top:2px dashed #e5d8ff}
 #cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;max-width:1000px;margin:18px auto 40px;padding:0 12px}
@@ -41,53 +42,39 @@ button:active{transform:translateY(3px);box-shadow:0 2px 0 var(--pink-d)}
 @media print{body.pc>*:not(#cards){display:none!important}body.pc #cards{grid-template-columns:repeat(2,1fr);margin:0;padding:0;max-width:none}body.pc .clsHead{break-before:page;page-break-before:always}body.pc .clsHead:first-child{break-before:auto;page-break-before:auto}body.pc{background:#fff!important}}
 </style>
 <section class="card" id="pin">
-  <h1>Teacher Setup</h1>
+  <h1 class="th"><img src="a/883fcdcfa915c3.webp" alt="Teacher Setup"></h1>
   <p class="ar">هذه الصفحة للمعلمات فقط. اكتبي الرقم السري.</p>
   <input id="pinIn" type="password" inputmode="numeric" maxlength="8" autocomplete="off" aria-label="PIN">
   <div class="row" style="justify-content:center"><button id="pinGo" type="button">Open</button></div>
   <p class="msg bad" id="pinMsg" role="alert"></p>
 </section>
 
-<main class="card" id="main" hidden>
-  <h1>Teacher Setup</h1>
-  <p class="ar">اعملي رابطاً خاصاً لطالباتك، فتصل علاماتهن إلى Google Sheet الخاص بك.</p>
-
-  <h2><b>1</b>Make your Google Form</h2>
-  <p class="ar">اعملي Google Form فيه 5 أسئلة من نوع Short answer بهذا الترتيب بالضبط:</p>
-  <ol><li>Name</li><li>Class</li><li>Map</li><li>Game</li><li>Stars</li></ol>
-  <p class="ar">من الإعدادات (Settings ← Responses): لا تطلبي تسجيل الدخول، ولا تجمعي الإيميلات. ومن تبويب Responses اضغطي <b>Link to Sheets</b> حتى تنزل العلامات في Google Sheet.</p>
-
-  <h2><b>2</b>Copy the pre-filled link</h2>
-  <p class="ar">من النقاط الثلاث ⋮ اختاري <b>Get pre-filled link</b>، واكتبي في الأسئلة الخمسة هذه الكلمات:</p>
-  <p><code>NAME</code> <code>CLASS</code> <code>MAP</code> <code>GAME</code> <code>STARS</code></p>
-  <p class="ar">ثم اضغطي Get link ← Copy link، والصقيه هنا:</p>
-  <textarea id="pre" placeholder="https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123=NAME..."></textarea>
-  <p class="ar" style="margin-top:12px">اسمك (يظهر لك فقط هنا):</p>
-  <input id="tname" maxlength="40" placeholder="Ms ..." autocomplete="off">
-  <div class="row"><button id="make" type="button">Make my class link</button></div>
-  <p class="msg" id="msg" role="status"></p>
-
-  <section id="out" aria-live="polite">
-    <h2 style="margin-top:0"><b>3</b>Share with your students</h2>
-    <p class="ar">ابعتي هذا الرابط أو الـ QR لطالباتك. لما تفتحه الطالبة مرة واحدة، تصل كل علاماتها إلى الشيت الخاص بك.</p>
-    <p id="link"></p>
-    <div class="row noprint"><button id="copy" type="button">Copy link</button><button id="test" class="ghost" type="button">Send a test row</button><button id="prt" class="ghost" type="button">Print</button></div>
-    <div id="qr" aria-label="QR code"></div>
-    <p class="msg" id="msg2" role="status"></p>
-  </section>
-
-  <section id="cardsBox">
-    <h2><b>4</b>Student cards (no typing for the students)</h2>
-    <p class="ar">بدل ما تكتب كل طالبة اسمها، اطبعي لكل طالبة كرتاً فيه QR خاص بها. تمسحه مرة واحدة، فيعرف التطبيق اسمها وصفها، وتصل علاماتها إلى الشيت الخاص بك بنفس الاسم دائماً.</p>
-    <p class="ar"><b>الأسماء تبقى على جهازك فقط.</b> لا تُرفع إلى الموقع، وتُكتب فقط داخل الـ QR المطبوع.</p>
-    <p class="ar">اكتبي رقم الصف في سطر لوحده (مثل <code>1/3</code>)، وتحته أسماء الطالبات، كل اسم في سطر:</p>
-    <textarea id="roster" style="min-height:190px" placeholder="1/1&#10;Sara&#10;Maryam&#10;Noor&#10;&#10;1/2&#10;Fatima&#10;Aisha"></textarea>
-    <p class="ar" style="margin-top:12px">اختياري – لوحة Alphabet Queens لصفوفك: من الشيت File ← Share ← Publish to web، اختاري ورقة Queens ونوع CSV، والصقي الرابط هنا:</p>
-    <input id="qcsv" placeholder="https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?gid=...&single=true&output=csv" autocomplete="off">
-    <div class="row"><button id="mkCards" type="button">Make the cards</button><button id="prCards" class="ghost" type="button" hidden>Print the cards</button></div>
-    <p class="msg" id="msg3" role="status"></p>
-  </section>
-  <div id="cards" aria-live="polite"></div>
+<main class="tmain" id="main" hidden>
+<h1 class="th"><img src="a/883fcdcfa915c3.webp" alt="Teacher Setup"></h1>
+<div class="frame">
+<p class="ar lead">اعملي رابطاً خاصاً لطالباتك، فتصل علاماتهن إلى Google Sheet الخاص بك.</p>
+<section class="sec s1"><h2 class="sh"><b>1</b><span>Make your Google Form</span></h2><div class="sb"><img class="ic" src="a/fb071e591d4cad.webp" alt=""><div class="sc"><p class="ar">اعملي Google Form فيه 5 أسئلة من نوع Short answer بهذا الترتيب بالضبط:</p>
+<ol class="chips"><li>1. Name</li><li>2. Class</li><li>3. Map</li><li>4. Game</li><li>5. Stars</li></ol></div></div><p class="ar tip"><span class="gear">⚙️</span><span>من الإعدادات (Settings ← Responses): لا تطلبي تسجيل الدخول، ولا تجمعي الإيميلات. ومن تبويب Responses اضغطي <b>Link to Sheets</b> حتى تنزل العلامات في Google Sheet.</span></p></section>
+<section class="sec s2"><h2 class="sh"><b>2</b><span>Copy the pre-filled link</span></h2><div class="sb"><img class="ic" src="a/671d8780debd8d.webp" alt=""><div class="sc"><p class="ar">من النقاط الثلاث ⋮ اختاري <b>Get pre-filled link</b>، واكتبي في الأسئلة الخمسة هذه الكلمات:</p>
+<p class="chips2"><code>NAME</code> <code>CLASS</code> <code>MAP</code> <code>GAME</code> <code>STARS</code></p>
+<p class="ar">ثم اضغطي Get link ← Copy link، والصقيه هنا:</p></div></div><textarea id="pre" placeholder="https://docs.google.com/forms/d/e/.../viewform?usp=pp_url&entry.123=NAME..."></textarea>
+<p class="ar" style="margin-top:12px">اسمك (يظهر لك فقط هنا):</p>
+<input id="tname" maxlength="40" placeholder="Ms ..." autocomplete="off">
+<div class="row c"><button id="make" class="green" type="button">🔗 Make my class link</button></div>
+<p class="msg" id="msg" role="status"></p></section>
+<section class="sec s3" id="out" aria-live="polite"><h2 class="sh"><b>3</b><span>Share with your students</span></h2><div class="sb"><img class="ic" src="a/56760cc1a4d3d7.webp" alt=""><div class="sc"><p class="ar">ابعتي هذا الرابط أو الـ QR لطالباتك. لما تفتحه الطالبة مرة واحدة، تصل كل علاماتها إلى الشيت الخاص بك.</p></div></div><p id="link"></p>
+<div class="row noprint c"><button id="copy" type="button">Copy link</button><button id="test" class="ghost" type="button">Send a test row</button><button id="prt" class="ghost" type="button">Print</button></div>
+<div id="qr" aria-label="QR code"></div>
+<p class="msg" id="msg2" role="status"></p></section>
+<section class="sec s4" id="cardsBox"><h2 class="sh"><b>4</b><span>Student cards (no typing for the students)</span></h2><div class="sb"><img class="ic" src="a/cb25ec71608983.webp" alt=""><div class="sc"><p class="ar">بدل ما تكتب كل طالبة اسمها، اطبعي لكل طالبة كرتاً فيه QR خاص بها. تمسحه مرة واحدة، فيعرف التطبيق اسمها وصفها، وتصل علاماتها إلى الشيت الخاص بك بنفس الاسم دائماً.</p>
+<p class="ar star">⭐ <b>الأسماء تبقى على جهازك فقط.</b> لا تُرفع إلى الموقع، وتُكتب فقط داخل الـ QR المطبوع.</p>
+<p class="ar star">⭐ اكتبي رقم الصف في سطر لوحده (مثل <code>1/3</code>)، وتحته أسماء الطالبات، كل اسم في سطر:</p></div></div><div class="roster"><textarea id="roster" placeholder="1/1&#10;Sara&#10;Maryam&#10;Noor&#10;&#10;1/2&#10;Fatima&#10;Aisha"></textarea></div>
+<p class="ar tip"><span class="gear">👑</span><span>اختياري – لوحة Alphabet Queens لصفوفك: من الشيت File ← Share ← Publish to web، اختاري ورقة Queens ونوع CSV، والصقي الرابط هنا:</span></p>
+<input id="qcsv" placeholder="https://docs.google.com/spreadsheets/d/e/2PACX-.../pub?gid=...&single=true&output=csv" autocomplete="off">
+<div class="row c"><button id="mkCards" class="purple" type="button">🖨️ Make the cards</button><button id="prCards" class="ghost" type="button" hidden>Print the cards</button></div>
+<p class="msg" id="msg3" role="status"></p></section>
+</div>
+<div id="cards" aria-live="polite"></div>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -147,4 +134,42 @@ $('#mkCards').onclick=()=>{const M=$('#msg3'),box=$('#cards');box.innerHTML='';$
 $('#prCards').onclick=()=>{document.body.classList.add('pc');window.print()};
 })();
 </script>
-<script>(function(){if(!("serviceWorker" in navigator))return;var home=/^\/(index\.html)?$/.test(location.pathname),pill=null;function show(d,t){if(!home)return;if(!pill){pill=document.createElement("div");pill.id="offpill";pill.style.cssText="position:fixed;left:10px;bottom:10px;z-index:99999;font:700 13px/1 Arial,sans-serif;color:#fff;background:rgba(123,63,228,.88);padding:7px 12px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:opacity .6s;pointer-events:none";document.body.appendChild(pill)}if(d>=t){pill.textContent="✓ Ready offline";pill.style.background="rgba(34,160,107,.92)";setTimeout(function(){pill.style.opacity="0"},5000)}else{pill.textContent="Saving for offline… "+Math.floor(d*100/t)+"%";pill.style.opacity="1"}}navigator.serviceWorker.addEventListener("message",function(e){if(e.data&&e.data.type==="offline-status")show(e.data.done,e.data.total)});function mq(){if(typeof window.flush=="function"||typeof window.wsFlush=="function"||!navigator.onLine)return;var q;try{q=JSON.parse(localStorage.getItem("ma-queue")||"[]")}catch(e){return}if(!q.length)return;var F="";try{var T=JSON.parse(localStorage.getItem("ma-teacher"));if(T&&T.f&&T.e&&T.e.length===5)F="https://docs.google.com/forms/d/e/"+T.f+"/formResponse"}catch(e){}if(!F)return;localStorage.setItem("ma-queue","[]");var left=[];Promise.all(q.map(function(r){return fetch(F,{method:"POST",mode:"no-cors",body:new URLSearchParams(r)}).catch(function(){left.push(r)})})).then(function(){if(left.length){var n=[];try{n=JSON.parse(localStorage.getItem("ma-queue")||"[]")}catch(e){}localStorage.setItem("ma-queue",JSON.stringify(left.concat(n)))}})}addEventListener("online",mq);addEventListener("load",function(){setTimeout(mq,2500);var v=document.getElementById("ivv"),iv=document.getElementById("iv");if(v&&iv){var ok=function(){iv.classList.add("ready")};v.addEventListener("error",ok);[].forEach.call(v.querySelectorAll("source"),function(x){x.addEventListener("error",ok)})}navigator.serviceWorker.register("/sw.js",{updateViaCache:"none"}).then(function(rg){try{rg.update()}catch(e){}var had=!!navigator.serviceWorker.controller,rl=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(had&&!rl){rl=true;try{if(!sessionStorage.getItem("swrl")){sessionStorage.setItem("swrl","1");location.reload()}}catch(e){}}});return navigator.serviceWorker.ready}).then(function(r){var a=r.active;if(!a)return;a.postMessage("fill");if(home){var k=0,iv=setInterval(function(){a.postMessage("status");if(++k>240||(pill&&pill.textContent.charAt(0)=="✓"))clearInterval(iv)},1500)}}).catch(function(){})})})()</script></body></html>
+<script>(function(){if(!("serviceWorker" in navigator))return;var home=/^\/(index\.html)?$/.test(location.pathname),pill=null;function show(d,t){if(!home)return;if(!pill){pill=document.createElement("div");pill.id="offpill";pill.style.cssText="position:fixed;left:10px;bottom:10px;z-index:99999;font:700 13px/1 Arial,sans-serif;color:#fff;background:rgba(123,63,228,.88);padding:7px 12px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:opacity .6s;pointer-events:none";document.body.appendChild(pill)}if(d>=t){pill.textContent="✓ Ready offline";pill.style.background="rgba(34,160,107,.92)";setTimeout(function(){pill.style.opacity="0"},5000)}else{pill.textContent="Saving for offline… "+Math.floor(d*100/t)+"%";pill.style.opacity="1"}}navigator.serviceWorker.addEventListener("message",function(e){if(e.data&&e.data.type==="offline-status")show(e.data.done,e.data.total)});function mq(){if(typeof window.flush=="function"||typeof window.wsFlush=="function"||!navigator.onLine)return;var q;try{q=JSON.parse(localStorage.getItem("ma-queue")||"[]")}catch(e){return}if(!q.length)return;var F="";try{var T=JSON.parse(localStorage.getItem("ma-teacher"));if(T&&T.f&&T.e&&T.e.length===5)F="https://docs.google.com/forms/d/e/"+T.f+"/formResponse"}catch(e){}if(!F)return;localStorage.setItem("ma-queue","[]");var left=[];Promise.all(q.map(function(r){return fetch(F,{method:"POST",mode:"no-cors",body:new URLSearchParams(r)}).catch(function(){left.push(r)})})).then(function(){if(left.length){var n=[];try{n=JSON.parse(localStorage.getItem("ma-queue")||"[]")}catch(e){}localStorage.setItem("ma-queue",JSON.stringify(left.concat(n)))}})}addEventListener("online",mq);addEventListener("load",function(){setTimeout(mq,2500);var v=document.getElementById("ivv"),iv=document.getElementById("iv");if(v&&iv){var ok=function(){iv.classList.add("ready")};v.addEventListener("error",ok);[].forEach.call(v.querySelectorAll("source"),function(x){x.addEventListener("error",ok)})}navigator.serviceWorker.register("/sw.js",{updateViaCache:"none"}).then(function(rg){try{rg.update()}catch(e){}var had=!!navigator.serviceWorker.controller,rl=false;navigator.serviceWorker.addEventListener("controllerchange",function(){if(had&&!rl){rl=true;try{if(!sessionStorage.getItem("swrl")){sessionStorage.setItem("swrl","1");location.reload()}}catch(e){}}});return navigator.serviceWorker.ready}).then(function(r){var a=r.active;if(!a)return;a.postMessage("fill");if(home){var k=0,iv=setInterval(function(){a.postMessage("status");if(++k>240||(pill&&pill.textContent.charAt(0)=="✓"))clearInterval(iv)},1500)}}).catch(function(){})})})()</script><style id="tdesign">
+html{background:#8fd0f7!important}body{background:transparent!important}
+#gbg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;background:url(a/b5626b7fc4d31b.webp) center bottom/cover no-repeat}
+@media (orientation:portrait){#gbg{background-image:url(a/d332703d704be8.webp)}}
+#gbg img{position:absolute;opacity:.97;animation:gcd ease-in-out infinite}@keyframes gcd{0%,100%{transform:translateX(-7vw)}50%{transform:translateX(11vw)}}
+.th{margin:0 auto -6px;max-width:640px;position:relative;z-index:2}.th img{display:block;width:100%;filter:drop-shadow(0 4px 6px rgba(60,20,120,.3))}
+#pin .th{margin-bottom:10px}
+.tmain{max-width:860px;margin:0 auto}
+.frame{background:rgba(255,255,255,.93);border:5px solid #b45ee8;border-radius:34px;padding:26px 20px 22px;box-shadow:0 0 0 4px #f1dcff,0 14px 30px rgba(60,30,120,.25);position:relative}
+.frame::before{content:"";position:absolute;inset:9px;border:3px dashed #e7b8ff;border-radius:26px;pointer-events:none}
+.lead{text-align:center!important;font-weight:700;color:#5a2bbd!important;margin:0 0 44px}
+.sec{position:relative;margin:0 0 30px;border:4px solid var(--c);border-radius:26px;background:var(--bg);padding:34px 18px 18px;box-shadow:0 6px 0 var(--l)}
+.s1{--c:#ff4f93;--l:#ffd0e4;--bg:#fff6fa;--g:linear-gradient(90deg,#ffd0e4,#fff0f6)}
+.s2{--c:#2f9be6;--l:#cfe9ff;--bg:#f3f9ff;--g:linear-gradient(90deg,#cfe9ff,#eef7ff)}
+.s3{--c:#2fbf6b;--l:#c9f1d9;--bg:#f2fcf6;--g:linear-gradient(90deg,#c9f1d9,#effbf4)}
+.s4{--c:#ff8a1e;--l:#ffe0bf;--bg:#fffaf2;--g:linear-gradient(90deg,#ffe0bf,#fff6ea)}
+.sh{position:absolute;top:-26px;left:6px;right:20px;margin:0;display:flex;align-items:center;gap:0}
+.sh b{flex:none;width:56px;height:56px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:800 30px "Baloo 2",sans-serif;border:4px solid #fff;box-shadow:0 3px 0 rgba(0,0,0,.15);position:relative;z-index:1}
+.sh span{margin-left:-14px;padding:6px 26px 6px 26px;background:var(--g);border-radius:0 999px 999px 0;font:800 clamp(18px,3.2vw,26px)/1.2 "Baloo 2",sans-serif;color:#3a1d8a;box-shadow:0 2px 0 var(--l)}
+.sb{display:flex;gap:16px;align-items:center;margin-top:10px}
+.ic{flex:none;width:clamp(90px,22%,170px);height:auto;filter:drop-shadow(0 4px 4px rgba(60,30,120,.15))}
+.sc{flex:1;min-width:0}
+.chips,.chips2{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;list-style:none;padding:0;margin:10px 0}
+.chips li{margin:0;background:#fff3cf;border:2px solid #ffd76a;border-radius:999px;padding:3px 14px;font-weight:800;color:#3a1d8a}
+.chips2 code{background:#fff;border:2px solid #ff9cc5;border-radius:999px;padding:3px 14px;color:#d12d6f;font-family:"Baloo 2",sans-serif;font-size:17px}
+.tip{background:#f1eaff;border-radius:16px;padding:10px 14px;margin:10px 0 0;color:#3a1d8a!important;display:flex;gap:10px;align-items:center}.tip .gear{font-size:28px;flex:none}
+.star{color:#3a1d8a!important}
+.sec textarea,.sec input{border:3px dashed var(--c);background:#fff}
+.row.c{justify-content:center}
+button.green{background:#2fbf6b;box-shadow:0 5px 0 #1d8a4b}button.purple{background:#8a3fe0;box-shadow:0 5px 0 #5a1fa8}
+button{font-size:21px}
+.roster{display:flex;gap:14px;align-items:center}.roster textarea{flex:1;min-height:190px}.qrim{width:110px;flex:none}
+#out{display:none;border:4px solid var(--c)!important;background:var(--bg)!important;padding:34px 18px 18px!important;border-radius:26px!important;margin-top:0!important}
+#cardsBox{border-top:4px solid var(--c)!important;padding-top:34px!important;margin-top:0!important}
+.card::before{border-color:#e7b8ff}
+@media (max-width:560px){.sb{flex-direction:column}.ic{width:120px}.qrim{display:none}.sh span{font-size:17px;padding:5px 14px 5px 22px}.sh b{width:46px;height:46px;font-size:24px}.frame{padding:22px 10px}}
+@media print{#gbg,.th,.ic,.qrim{display:none}.frame{border:0;box-shadow:none;background:#fff}.frame::before{display:none}}
+</style>
+</body></html>
