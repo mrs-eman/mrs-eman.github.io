@@ -30,7 +30,7 @@ button:focus-visible{outline:4px solid #1b1464;outline-offset:2px}
 .hh{max-width:640px;margin:0 auto -4.6cqw!important;position:relative;z-index:0;pointer-events:none;filter:drop-shadow(0 4px 5px rgba(20,50,110,.3))}.hh img{display:block;width:100%}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.2cqw)}}
 .panel{animation:floaty 4.6s ease-in-out infinite}.panel:nth-child(2){animation-duration:5s;animation-delay:-1.4s}.panel:nth-child(3){animation-duration:5.5s;animation-delay:-2.6s}.panel:nth-child(4){animation-duration:4.6s;animation-delay:-3.4s}
-@media (prefers-reduced-motion:reduce){.panel{animation:none}}
+
 .panel{position:relative;z-index:1;margin-top:.2cqw;filter:drop-shadow(0 5px 6px rgba(20,50,110,.28))}.panel>img{display:block;width:100%}.panel.game{width:66%;margin:-1.5cqw auto 0}
 #home{max-width:900px;margin:0 auto;padding:10px 10px 28px}
 #pair,#game{max-width:900px;margin:0 auto;padding:10px 10px 28px;container-type:inline-size}
@@ -80,7 +80,7 @@ button:focus-visible{outline:4px solid #1b1464;outline-offset:2px}
 .ib.lis{width:min(27cqw,240px)!important;min-width:0!important}
 .ib.blend{width:min(32cqw,270px)!important;min-width:150px!important}
 .mmid .say{margin-top:0}
-@media (prefers-reduced-motion:reduce){.mp{transition:none}.done .mj,.done .tw{animation:none}}
+
 .ribimg{position:absolute;left:25%;width:50%;top:1.6cqw;margin:0;z-index:2}.ribimg img{display:block;width:100%}
 .ribimg span,.rb span{position:absolute;left:19%;right:19%;top:14%;height:52%;display:flex;align-items:center;justify-content:center;white-space:nowrap;font:700 3.6cqw/1 var(--ui);color:#fff;-webkit-text-stroke:.8cqw #4b1fa3;paint-order:stroke fill}
 .rb{position:absolute;left:52%;width:42%;top:62%;z-index:3}.rb img{display:block;width:100%}.rb i{font-style:normal;color:#ffe45c;margin:0 .28em}
@@ -120,7 +120,7 @@ button:focus-visible{outline:4px solid #1b1464;outline-offset:2px}
 .bigstar{width:clamp(90px,16cqw,140px);margin:0 auto;display:block}
 .score{font:800 clamp(20px,3.4cqw,28px) var(--ui);margin:4px 0 0}
 [hidden]{display:none!important}
-@media (prefers-reduced-motion:reduce){.tile,.plus{transition:none}.shake,.opt.wrong{animation:none}}
+
 .tabs{grid-template-columns:repeat(4,1fr)!important;max-width:min(100%,540px);margin-left:auto!important;margin-right:auto!important;gap:2cqw!important}
 .tabs button{border-radius:22%!important;transition:transform .18s;transform:scale(.9)}
 .tabs [aria-current="step"]{transform:scale(1.06);filter:drop-shadow(0 0 3px #fff) drop-shadow(0 0 5px #ffc21a) drop-shadow(0 0 9px #ffb400)!important}
@@ -279,7 +279,7 @@ renderHome();
 })();
 </script>
 <style id="h2c">.head2>img{transform:translateX(-10%)}</style>
-<style id="girlsnd">.hh,.head2{position:relative;z-index:6}.hh img,.head2>img{cursor:pointer}.girlhop{animation:ghop .5s ease}@keyframes ghop{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}.head2>img.girlhop{animation:ghop2 .5s ease}@keyframes ghop2{0%,100%{transform:translateX(-10%)}40%{transform:translateX(-10%) translateY(-8px)}}@media (prefers-reduced-motion:reduce){.girlhop{animation:none!important}}</style>
+<style id="girlsnd">.hh,.head2{position:relative;z-index:6}.hh img,.head2>img{cursor:pointer}.girlhop{animation:ghop .5s ease}@keyframes ghop{0%,100%{transform:translateY(0)}40%{transform:translateY(-8px)}}.head2>img.girlhop{animation:ghop2 .5s ease}@keyframes ghop2{0%,100%{transform:translateX(-10%)}40%{transform:translateX(-10%) translateY(-8px)}}</style>
 <script>(function(){var A=new Audio("a/79ced820671e9c.mp3");A.preload="auto";function play(e){var im=e.currentTarget;try{A.currentTime=0;var p=A.play();if(p&&p.catch)p.catch(function(){})}catch(_){}im.classList.remove("girlhop");void im.offsetWidth;im.classList.add("girlhop")}document.querySelectorAll(".hh img,.head2>img").forEach(function(im){im.addEventListener("click",play)})})();</script>
 <style id="boyred">html.isboy [fill="#ff4f93"],html.isboy [fill="#FF4F93"],html.isboy [fill="#e6337f"],html.isboy [fill="#ff2e88"]{fill:#e3242b!important}html.isboy [stroke="#ff4f93"],html.isboy [stroke="#e6337f"]{stroke:#e3242b!important}html.isboy .say{background:#ffe3e3!important}</style>
 <style id="boynav">html.isboy .homeb,html.isboy .navs2,html.isboy .navs,html.isboy #mapHome,html.isboy #printBtn,html.isboy #endHome{zoom:.8}html.isboy img.home,html.isboy #back img{object-fit:contain}html.isboy .sitehome{zoom:1.1!important;background:url(a/3986282d2e3b27.webp) center/contain no-repeat!important;box-shadow:none!important;border:0!important}html.isboy .sitehome::before,html.isboy .sitehome::after{display:none!important}html.isboy #queensBtn{width:clamp(210px,36vw,340px)!important}</style>
