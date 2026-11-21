@@ -316,4 +316,4 @@ addEventListener('pointerdown',function(e){if(played||e.target===hit)return;if(e
 <script id="boyintro">(function(){var played=false;async function intro(){try{unlock();if(!ctx)return;const b=await buf('v_intro');if(!b)return;stop();const s=ctx.createBufferSource();s.buffer=b;s.connect(ctx.destination);s.start();cur=s;played=true;}catch(e){}}
 window.girlIntro=intro;
 setTimeout(function(){try{unlock();if(ctx&&ctx.state==='running')intro();else if(ctx)ctx.resume().then(function(){if(!played&&ctx.state==='running')intro()}).catch(function(){})}catch(e){}},400);
-addEventListener('pointerdown',function(e){if(played)return;if(e.target.closest&&e.target.closest('button,a')){played=true;return}played=true;setTimeout(intro,120)},{capture:true,once:true});})();</script>
+addEventListener('pointerdown',function(e){if(played)return;try{unlock();if(ctx&&ctx.resume)ctx.resume()}catch(_){}if(e.target.closest&&e.target.closest('a,#back,#boyHomeHot')){played=true;return}played=true;setTimeout(intro,120)},{capture:true,once:true});})();</script>
