@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en" class="isboy"><head><script id="autovoice">(function(){var P=window.AudioBufferSourceNode&&AudioBufferSourceNode.prototype;if(!P||P.__av)return;P.__av=1;var rec=[],phase=true,started=false,o=P.start;
-P.start=function(){try{if(phase&&!this.loop){rec.push(this);started=true}}catch(e){}return o.apply(this,arguments)};
+P.start=function(){try{if(phase&&!this.loop&&!this.__noav){rec.push(this);started=true}}catch(e){}return o.apply(this,arguments)};
 addEventListener('pointerdown',function(e){if(!e.isTrusted||!phase||!started)return;phase=false;rec.forEach(function(s){try{s.onended=null;s.stop()}catch(_){}});rec=[];try{window.stopVoice&&window.stopVoice()}catch(_){}},{capture:true});
 function kick(){try{var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;var t=new AC();var ok=t.state==='running';if(!ok||started)return;
 var pts=[[.5,.97],[.03,.5],[.97,.5],[.5,.5],[.2,.9],[.8,.9]],tg=null;for(var i=0;i<pts.length&&!tg;i++){var el=document.elementFromPoint(innerWidth*pts[i][0],innerHeight*pts[i][1]);if(el&&!(el.closest&&el.closest('button,a,[role=button],input,video,.card,.hot,.lhot')))tg=el}
