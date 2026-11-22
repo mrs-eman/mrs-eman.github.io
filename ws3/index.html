@@ -657,7 +657,7 @@ function wsDone(i){const p=$$('.sheet')[i];let r=p.querySelector('.wsRes');if(r)
  const h=p.querySelector('h1');(h?h:p.firstElementChild).before(r);
  const fit=()=>wsFit(r);try{document.fonts.load('100px WB').then(fit,fit)}catch(e){fit()}
  try{p.scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}
- try{const k=stp?(got>=NN[i]-(NN[i]===6?1:0)?'st_champion':(got>=3?'st_great':'st_good')):PRAISE[Math.random()*PRAISE.length|0][0];if(stp){wsFly(r,stp,()=>{try{if(A.st_thump)play('st_thump')}catch(e){}setTimeout(()=>{Promise.resolve(play(k)).catch(()=>{})},420)})}else Promise.resolve(play(k)).catch(()=>{})}catch(e){}
+ try{const k=stp?(got>=NN[i]?'st_champion':(got>=3?'st_great':'st_good')):PRAISE[Math.random()*PRAISE.length|0][0];if(stp){wsFly(r,stp,()=>{try{if(A.st_thump)play('st_thump')}catch(e){}setTimeout(()=>{Promise.resolve(play(k)).catch(()=>{})},420)})}else Promise.resolve(play(k)).catch(()=>{})}catch(e){}
 }
 /* ---- send each finished worksheet to the teacher's Google Sheet ---- */
 let WS_FORM='';
