@@ -560,7 +560,7 @@ function draw3(){
   const {ctx2:c,img,x0,y0,w,h,strokes,si,idx,lw,paint,tmp,it}=T3,S=880;
   c.clearRect(0,0,S,S);
   // ghost letter
-  if(T3.done&&T3.rb){c.drawImage(T3.rb,0,0)}else{c.globalAlpha=.3;if(__isb()){if(!T3.gh){const g=document.createElement('canvas');g.width=g.height=S;const q=g.getContext('2d');q.drawImage(img,x0,y0,w,h);q.globalCompositeOperation='source-in';q.fillStyle='#e8262d';q.fillRect(0,0,S,S);T3.gh=g}c.drawImage(T3.gh,0,0)}else c.drawImage(img,x0,y0,w,h);c.globalAlpha=1}
+  if(T3.done&&T3.rb){c.drawImage(T3.rb,0,0)}else{c.globalAlpha=.3;if(__isb()){if(!T3.gh){const g=document.createElement('canvas');g.width=g.height=S;const q=g.getContext('2d');q.drawImage(img,x0,y0,w,h);q.globalCompositeOperation='source-in';q.fillStyle='#2f7de1';q.fillRect(0,0,S,S);T3.gh=g}c.drawImage(T3.gh,0,0)}else c.drawImage(img,x0,y0,w,h);c.globalAlpha=1}
   if(!T3.done){
     // real letter wherever the finger has traced
     const p=paint.getContext('2d');p.clearRect(0,0,S,S);p.strokeStyle='#000';p.lineCap=p.lineJoin='round';p.lineWidth=lw;
