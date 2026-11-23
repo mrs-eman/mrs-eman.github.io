@@ -162,13 +162,13 @@ const W=[
  {"w": "under", "l": "u", "syl": ["un", "der"], "u": [[0], [1], [2], [3, 4]], "snd": ["under_0", "under_1", "under_3", "under_4"], "bl": ["under_2", null]}
 ];
 /* poster boxes, in poster pixels (1536 x 1024): [x, y, w, h] */
-const BOX=[[220, 427, 244, 69], [220, 515, 244, 68], [695, 427, 232, 69], [695, 515, 232, 68], [1170, 427, 237, 69], [1170, 515, 237, 68], [401, 757, 281, 66], [401, 840, 281, 66], [968, 757, 272, 66], [968, 840, 272, 66]];
-const HOT=[[45, 425, 167, 73], [45, 513, 167, 72], [517, 425, 171, 73], [517, 513, 171, 72], [980, 425, 182, 73], [980, 513, 182, 72], [200, 755, 193, 70], [200, 838, 193, 70], [748, 755, 214, 70], [748, 838, 214, 70]];
+const BOX=[[230, 472, 240, 66], [230, 555, 240, 63], [700, 472, 217, 66], [700, 555, 217, 63], [1166, 472, 233, 66], [1166, 555, 233, 63], [405, 797, 277, 61], [405, 877, 277, 61], [985, 797, 267, 61], [985, 877, 267, 61]];
+const HOT=[[50, 470, 170, 70], [50, 553, 170, 67], [530, 470, 165, 70], [530, 553, 165, 67], [978, 470, 182, 70], [978, 553, 182, 67], [205, 795, 190, 65], [205, 875, 190, 65], [760, 795, 215, 65], [760, 875, 215, 65]];
 const PW=1448,PH=1086;
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pct=(v,t)=>(v/t*100)+'%';
 const place=(e,[x,y,w,h])=>Object.assign(e.style,{left:pct(x,PW),top:pct(y,PH),width:pct(w,PW),height:pct(h,PH)});
-A.bg='a/f8f721833a7677.webp';FX.sp=[{"t": "sun", "x": 1170, "y": 0, "w": 268, "h": 254, "src": "a/b5bef860daee92.webp"}];Object.assign(COL,{l:'#e3242b',b:'#f0a000',q:'#1f6fd1',j:'#f07a10',u:'#1f9e45'});{const hb=document.createElement('button');hb.type='button';hb.id='boyHomeHot';hb.setAttribute('aria-label','Home');Object.assign(hb.style,{position:'absolute',left:'0%',top:'0%',width:(100/PW*100)+'%',height:(92/PH*100)+'%',border:0,background:'transparent',cursor:'pointer',zIndex:5});hb.onclick=()=>{try{unlock()}catch(e){}$('#toMap').click()};$('#world').appendChild(hb)}$('#backdrop').src=A.bg;$('#world>img.bg').src=A.bg;
+A.bg='a/da86969609ed3f.webp';FX.sp=[{"t": "sun", "x": 1161, "y": 30, "w": 256, "h": 230, "src": "a/cca267d281aba7.webp"}];Object.assign(COL,{l:'#e3242b',b:'#f0a000',q:'#1f6fd1',j:'#f07a10',u:'#1f9e45'});{const hb=document.createElement('button');hb.type='button';hb.id='boyHomeHot';hb.setAttribute('aria-label','Home');Object.assign(hb.style,{position:'absolute',left:'0%',top:'0%',width:(100/PW*100)+'%',height:(92/PH*100)+'%',border:0,background:'transparent',cursor:'pointer',zIndex:5});hb.onclick=()=>{try{unlock()}catch(e){}$('#toMap').click()};$('#world').appendChild(hb)}$('#backdrop').src=A.bg;$('#world>img.bg').src=A.bg;
 /* moving garden: flowers sway, the sun glows, the butterfly flaps (cut from the poster) */
 FX.sp.forEach((p,i)=>{if(p.t==='bf'){const w=document.createElement('div');w.className='bfw';
     Object.assign(w.style,{left:pct(p.x,PW),top:pct(p.y,PH),width:pct(p.w,PW),height:pct(p.h,PH)});
@@ -235,7 +235,7 @@ W.forEach((d,n)=>{
   place(b,BOX[n]);chips(b,d);b.onclick=()=>openCard(n);
   world.append(hot,b)});
 /* tap a letter card: the poster zooms onto it and the two words are read */
-const PANELS=[[15, 290, 470, 330], [490, 290, 460, 330], [955, 290, 480, 330], [170, 620, 540, 320], [720, 620, 545, 320]];
+const PANELS=[[20, 320, 480, 330], [505, 320, 440, 330], [950, 320, 480, 330], [165, 650, 555, 320], [730, 650, 555, 320]];
 const LET=['L','B','Q','J','U'];let zoomedAt=-1;
 function zoomTo(i){const [x,y,w,h]=PANELS[i],s=Math.min(PW/w,PH/h)*.9,X=((PW-s*w)/2-s*x)/PW*100,Y=((PH-s*h)/2-s*y)/PH*100;
   world.style.transform=`translate(${X}%,${Y}%) scale(${s})`;stage.classList.add('zoomed');zoomedAt=i;run++;stop();}

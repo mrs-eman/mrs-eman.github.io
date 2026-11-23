@@ -167,11 +167,11 @@ const W=[
 /* poster boxes, in poster pixels (1536 x 1024): [x, y, w, h] */
 const BOX=[[218,398,269,73],[218,496,269,76],[725,400,266,73],[725,497,266,75],[1222,400,279,73],[1223,497,278,75],
            [231,755,255,73],[231,852,255,75],[715,756,271,73],[715,852,271,76],[1209,757,288,73],[1209,854,289,75]];
-const PW=1448,PH=1086;BOX.splice(0,12,...[[199, 420, 262, 76], [199, 514, 262, 78], [676, 421, 260, 76], [676, 515, 260, 77], [1147, 421, 272, 77], [1147, 516, 272, 78], [215, 771, 247, 73], [215, 864, 247, 75], [671, 771, 263, 73], [671, 864, 263, 75], [1135, 772, 280, 71], [1135, 864, 281, 74]]);
+const PW=1448,PH=1086;BOX.splice(0,12,...[[210, 484, 253, 60], [210, 560, 253, 68], [686, 484, 247, 60], [686, 560, 247, 68], [1158, 484, 252, 60], [1158, 560, 252, 68], [226, 801, 238, 65], [226, 878, 238, 68], [689, 801, 243, 65], [689, 878, 243, 68], [1160, 801, 252, 65], [1160, 878, 252, 68]]);
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pct=(v,t)=>(v/t*100)+'%';
 const place=(e,[x,y,w,h])=>Object.assign(e.style,{left:pct(x,PW),top:pct(y,PH),width:pct(w,PW),height:pct(h,PH)});
-A.bg='a/3c4273f555d54a.webp';FX.sp=[{"t": "sun", "x": 1195, "y": 5, "w": 240, "h": 220, "src": "a/c72aeb01f6bbaf.webp"}, {"t": "fl", "x": 0, "y": 1000, "w": 92, "h": 82, "src": "a/c30efa2bd3dd4e.webp"}, {"t": "fl", "x": 98, "y": 1008, "w": 68, "h": 62, "src": "a/1bed0501b2aae1.webp"}, {"t": "fl", "x": 358, "y": 1012, "w": 80, "h": 70, "src": "a/0929e083bf9a1b.webp"}, {"t": "fl", "x": 978, "y": 1006, "w": 80, "h": 70, "src": "a/880ccd54d6c0d5.webp"}, {"t": "fl", "x": 1288, "y": 1008, "w": 58, "h": 54, "src": "a/e6c95ae0a45f52.webp"}, {"t": "fl", "x": 1352, "y": 1006, "w": 94, "h": 80, "src": "a/443f8e9fdcf162.webp"}, {"t": "fl", "x": 378, "y": 246, "w": 60, "h": 56, "src": "a/29140e80828950.webp"}, {"t": "fl", "x": 1152, "y": 232, "w": 60, "h": 58, "src": "a/e832e34c3dca60.webp"}];Object.assign(COL,{s:'#e3242b',a:'#ff7a1a',t:'#7b2fd0',p:'#1f6fd1',i:'#1f9e45',n:'#e3242b'});{const hb=document.createElement('button');hb.type='button';hb.id='boyHomeHot';hb.setAttribute('aria-label','Home');Object.assign(hb.style,{position:'absolute',left:(14/PW*100)+'%',top:(172/PH*100)+'%',width:(172/PW*100)+'%',height:(172/PH*100)+'%',border:0,background:'transparent',borderRadius:'50%',cursor:'pointer',zIndex:5});hb.onclick=()=>{try{unlock()}catch(e){}$('#toMap').click()};$('#world').appendChild(hb)}$('#backdrop').src=A.bg;$('#world>img.bg').src=A.bg;
+A.bg='a/8be2834b4b9a71.webp';FX.sp=[{"t": "sun", "x": 1200, "y": 57, "w": 177, "h": 169, "src": "a/ce03b79727e36f.webp"}];Object.assign(COL,{s:'#e3242b',a:'#1f5fd1',t:'#f0a000',p:'#1f9e45',i:'#7b2fd0',n:'#f06a10'});{const hb=document.createElement('button');hb.type='button';hb.id='boyHomeHot';hb.setAttribute('aria-label','Home');Object.assign(hb.style,{position:'absolute',left:(4/PW*100)+'%',top:(8/PH*100)+'%',width:(92/PW*100)+'%',height:(92/PH*100)+'%',border:0,background:'transparent',borderRadius:'50%',cursor:'pointer',zIndex:5});hb.onclick=()=>{try{unlock()}catch(e){}$('#toMap').click()};$('#world').appendChild(hb)}$('#backdrop').src=A.bg;$('#world>img.bg').src=A.bg;
 /* moving garden: flowers sway, the sun glows, the butterfly flaps (cut from the poster) */
 FX.sp.forEach((p,i)=>{if(p.t==='bf'){const w=document.createElement('div');w.className='bfw';
     Object.assign(w.style,{left:pct(p.x,PW),top:pct(p.y,PH),width:pct(p.w,PW),height:pct(p.h,PH)});
@@ -238,7 +238,7 @@ W.forEach((d,n)=>{
   place(b,BOX[n]);chips(b,d);b.onclick=()=>openCard(n);
   world.append(hot,b)});
 /* tap a letter card: the poster zooms onto it and the two words are read */
-const PANELS=[[5, 280, 480, 345], [485, 285, 475, 340], [960, 280, 485, 345], [5, 630, 480, 350], [485, 640, 470, 340], [955, 630, 490, 350]];
+const PANELS=[[10, 345, 480, 320], [490, 345, 460, 320], [960, 345, 480, 320], [10, 665, 480, 320], [490, 665, 460, 320], [960, 665, 480, 320]];
 const LET=['S','A','T','P','I','N'];let zoomedAt=-1;
 function zoomTo(i){const [x,y,w,h]=PANELS[i],s=Math.min(PW/w,PH/h)*.9,X=((PW-s*w)/2-s*x)/PW*100,Y=((PH-s*h)/2-s*y)/PH*100;
   world.style.transform=`translate(${X}%,${Y}%) scale(${s})`;stage.classList.add('zoomed');zoomedAt=i;run++;stop();}
