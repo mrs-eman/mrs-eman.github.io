@@ -1,7 +1,7 @@
 // Mrs Eman Alphabet - offline support.
 // On first open the whole site (pages, pictures, sounds, videos) is saved on the device,
 // so every map, game and worksheet opens later without internet.
-const CACHE='alphabet-world-v275';
+const CACHE='alphabet-world-v276';
 const FONTS='alphabet-fonts-1';
 const FILES='alphabet-files-1'; // pictures in /a/ never change their name, so they are kept across updates
 const isShared=p=>p.startsWith('/a/');
@@ -56,8 +56,9 @@ async function fill(){
 async function status(){
   const c=await caches.open(CACHE),f=await caches.open(FILES);
   const have=new Set((await c.keys()).concat(await f.keys()).map(r=>new URL(r.url).pathname));
-  const done=ALL.filter(u=>have.has(u)).length;
-  return {done,total:ALL.length};
+  const skip=new Set(GEN==='boy'?ONLYG:GEN==='girl'?ONLYB:[]);const need=ALL.filter(u=>!skip.has(u)); // the other character's pictures are not needed
+  const done=need.filter(u=>have.has(u)).length;
+  return {done,total:need.length};
 }
 async function report(){
   const s=await status();
@@ -80,7 +81,6 @@ self.addEventListener('message',e=>{
 
 // video: answer "range" requests from the saved full file
 async function video(req){
-  lastNav=Date.now();
   const url=new URL(req.url);url.search='';
   const c=await caches.open(CACHE);
   let hit=await c.match(url.pathname);
@@ -116,7 +116,6 @@ async function page(req){
 }
 // pictures, sounds and other files: saved copy first
 async function file(req){
-  lastNav=Date.now(); // the open page needs this now: background saving waits
   const c=await cacheFor(new URL(req.url).pathname);
   // exact lookup is ~20x faster than ignoreSearch (which scans every saved file)
   const u=new URL(req.url),key=u.origin+u.pathname;
