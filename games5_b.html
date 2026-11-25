@@ -603,7 +603,7 @@ async function strokeDone(){
   if(T3.si<T3.strokes.length){fx.tap();return;}
   T3.done=true;T3.si=T3.strokes.length-1;fx.ding();draw3();const tk=navTok;g3max=Math.max(g3max,g3i+1);navUpd(3);
   const cv=$('#g3 .trace');restart(cv,'wiggle');flyStar(cv);
-  await say([praise()]);await wait(450);if(cur!=='g3'||tk!==navTok)return;
+  await wait(250);await say(['n_'+g3list[g3i].L.k,praise()]);await wait(450);if(cur!=='g3'||tk!==navTok)return;
   g3i++;if(g3i<g3list.length){fx.whoosh();g3item()}else{cancelAnimationFrame(g3raf);finish();}
 }
 
