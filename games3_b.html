@@ -1,4 +1,4 @@
-<!doctype html><html class="isboy"><head><script id="autovoice">(function(){var P=window.AudioBufferSourceNode&&AudioBufferSourceNode.prototype;if(!P||P.__av)return;P.__av=1;var rec=[],phase=true,started=false,o=P.start;
+<!doctype html><html class="isboy" dir="ltr" translate="no" lang="en"><head><meta name="google" content="notranslate"><script id="autovoice">(function(){var P=window.AudioBufferSourceNode&&AudioBufferSourceNode.prototype;if(!P||P.__av)return;P.__av=1;var rec=[],phase=true,started=false,o=P.start;
 P.start=function(){try{if(phase&&!this.loop&&!this.__noav){rec.push(this);started=true}}catch(e){}return o.apply(this,arguments)};
 addEventListener('pointerdown',function(e){if(!e.isTrusted||!phase||!started)return;phase=false;rec.forEach(function(s){try{s.onended=null;s.stop()}catch(_){}});rec=[];try{window.stopVoice&&window.stopVoice()}catch(_){}},{capture:true});
 function kick(){try{var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;var t=new AC();var ok=t.state==='running';if(!ok||started)return;
@@ -909,4 +909,29 @@ el.querySelector('.home').onclick=()=>{el.classList.remove('show');try{document.
 
 
 
-<script id="offpause">(function(){if(!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.style.animationPlayState=e.isIntersecting?"":"paused"})},{rootMargin:"120px"});var seen=new WeakSet();function scan(){document.querySelectorAll("body *").forEach(function(el){if(seen.has(el))return;var c=getComputedStyle(el);if(c.animationName!=="none"&&c.animationIterationCount.indexOf("infinite")>-1){seen.add(el);io.observe(el)}})}addEventListener("load",function(){setTimeout(scan,600);setTimeout(scan,4000)})})();</script><script id="bct">(function(){var C=[0, 248, 407, 555, 703, 856, 1022, 1221, 1480, 1633, 1839, 2014, 2114],W=2114;function go(){var w=document.querySelector('#menu h1 .ctw');if(!w)return setTimeout(go,150);if(!document.documentElement.classList.contains('isboy')||w.querySelector('i.bl'))return;w.style.aspectRatio=W+'/350';for(var i=0;i<C.length-1;i++){var e=document.createElement('i');e.className='bl';var l=C[i]/W*100,r=(W-C[i+1])/W*100;e.style.clipPath='inset(0 '+r.toFixed(2)+'% 0 '+l.toFixed(2)+'%)';e.style.animationDelay=(i*0.11)+'s';w.appendChild(e)}}go()})();</script></body></html>
+<script id="offpause">(function(){if(!("IntersectionObserver" in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(e){e.target.style.animationPlayState=e.isIntersecting?"":"paused"})},{rootMargin:"120px"});var seen=new WeakSet();function scan(){document.querySelectorAll("body *").forEach(function(el){if(seen.has(el))return;var c=getComputedStyle(el);if(c.animationName!=="none"&&c.animationIterationCount.indexOf("infinite")>-1){seen.add(el);io.observe(el)}})}addEventListener("load",function(){setTimeout(scan,600);setTimeout(scan,4000)})})();</script><script id="bct">(function(){var C=[0, 248, 407, 555, 703, 856, 1022, 1221, 1480, 1633, 1839, 2014, 2114],W=2114;function go(){var w=document.querySelector('#menu h1 .ctw');if(!w)return setTimeout(go,150);if(!document.documentElement.classList.contains('isboy')||w.querySelector('i.bl'))return;w.style.aspectRatio=W+'/350';for(var i=0;i<C.length-1;i++){var e=document.createElement('i');e.className='bl';var l=C[i]/W*100,r=(W-C[i+1])/W*100;e.style.clipPath='inset(0 '+r.toFixed(2)+'% 0 '+l.toFixed(2)+'%)';e.style.animationDelay=(i*0.11)+'s';w.appendChild(e)}}go()})();</script><style id="g3p">
+html.g3p,html.g3p body{background:#00abfd!important}html.g3p #back{background:url(a/f2be0ca2585f1d.webp) center/cover no-repeat!important;filter:blur(14px) saturate(1.1);transform:scale(1.12)}html.g3p #stage{border-radius:0!important;box-shadow:none!important}
+html.g3p #stage{width:720px!important;height:1280px!important}
+html.g3p #garden{background:url(a/f2be0ca2585f1d.webp) center/100% 100% no-repeat!important}
+html.g3p #garden>*{display:none!important}
+html.g3p #stage::after{right:12px!important;top:16px!important;width:150px!important;height:70px!important}
+html.g3p #g3 .homeBtn{left:18px!important;top:18px!important}
+html.g3p #g3 .starbar{right:170px!important;top:20px!important;height:62px!important;padding:0 16px 0 8px!important;font-size:30px!important;transform:none!important}
+html.g3p #g3 .starbar .sicon{height:48px!important;width:auto!important}
+html.g3p #g3 .dots{left:118px!important;top:38px!important;transform:none!important;gap:7px!important}
+html.g3p #g3 .dots i{width:22px!important;height:22px!important;border-width:3px!important}
+html.g3p #g3 .board{left:73px!important;top:358px!important;width:576px!important;height:594px!important;background:transparent!important;box-shadow:none!important;border:0!important;outline:0!important}
+html.g3p #g3 .board::before,html.g3p #g3 .board::after{display:none!important}
+html.g3p #g3 .trace{left:91px!important;top:385px!important;width:540px!important;height:540px!important}
+html.g3p #g3 .mini{left:122px!important;top:144px!important;width:475px!important;flex-direction:row!important;justify-content:space-between!important;gap:0!important}
+html.g3p #g3 .mini .tile{width:224px!important;height:186px!important;background:transparent!important;box-shadow:none!important;border:0!important;outline:0!important}
+html.g3p #g3 .mini .tile img{transform:scale(1.25)}
+html.g3p #g3 .mini .tile:not(.now){opacity:.55}
+html.g3p #g3 .guide{left:-10px!important;bottom:-8px!important;width:300px!important}
+html.g3p #g3 .navs{left:auto!important;right:18px!important;bottom:18px!important}
+#g3 .dots i.done{background:radial-gradient(circle at 35% 30%,#fff,#ff8cc0 45%,#f2559a)!important;border-color:#fff!important}
+html.isboy #g3 .dots i.done{background:radial-gradient(circle at 35% 30%,#fff,#ff6b6b 45%,#e8262d)!important}
+</style>
+<script id="g3pjs">(function(){var F=window.fit2;function P(){var p=innerWidth/innerHeight<.8&&typeof cur!=='undefined'&&cur==='g3';document.documentElement.classList.toggle('g3p',p);var W=p?720:1200,H=p?1280:800,s=Math.min(innerWidth/W,innerHeight/H);stage.style.transform='scale('+s+')';stage.style.left=((innerWidth-W*s)/2)+'px';stage.style.top=((innerHeight-H*s)/2)+'px';stage._s=s}
+window.fit2=P;removeEventListener('resize',F);addEventListener('resize',P);var S=window.show;window.show=function(id){S(id);P()};show=window.show;P()})();</script>
+</body></html>
