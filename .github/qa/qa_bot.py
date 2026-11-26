@@ -285,6 +285,9 @@ async def t_ws(br, page, size, ua=None):
     r = await pg.evaluate("""(()=>{const p=[...document.querySelectorAll('section.sheet')].find(x=>x.dataset.v==='sp');if(!p)return 'no speaking sheet';
       document.querySelectorAll('section.sheet').forEach(x=>x.hidden=true);p.hidden=false;p.scrollIntoView();const b=p.querySelector('.rec');if(!b)return 'no record button';b.click();return ''})()""")
     await pg.wait_for_timeout(1200)
+    for _ in range(10):
+        if await pg.evaluate("(()=>{const i=document.querySelector('#micHelp img');return !i||(i.complete&&i.naturalWidth>0)})()"): break
+        await pg.wait_for_timeout(400)
     s = await shot(R, f'mic_{page}_{size}' + ('_iphone' if ua else ''))
     info = await pg.evaluate("(()=>{const m=document.getElementById('micHelp');if(!m)return null;const i=m.querySelector('img');const b=(i||m).getBoundingClientRect();return {img:i?i.src.split('/').pop():null,loaded:i?i.complete&&i.naturalWidth>0:false,box:[b.left,b.top,b.right,b.bottom],W:innerWidth,H:innerHeight}})()")
     msg = []

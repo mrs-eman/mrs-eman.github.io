@@ -416,7 +416,7 @@ let total=0, best={1:0,2:0,3:0};
 try{const s=JSON.parse(localStorage.getItem('lfg-map1')||'{}');total=s.total||0;best=Object.assign(best,s.best||{});}catch(e){}
 function save(){try{localStorage.setItem('lfg-map1',JSON.stringify({total,best}))}catch(e){}}
 function paintStars(){$$('.scount').forEach(s=>s.textContent=total);
-  $$('.card').forEach(c=>{const g=+c.dataset.g;c.querySelector('.stars').innerHTML=[0,1,2].map(i=>`<img src="${A.o_star}" class="${i<best[g]?'got':''}" alt="">`).join('')});}
+  $$('.card').forEach(c=>{const g=+c.dataset.g;c.querySelector('.stars').innerHTML=[0,1,2].map(i=>`<img src="a/cc463fe0461b21.webp" class="${i<best[g]?'got':''}" alt="">`).join('')});}
 function flyStar(fromEl){
   const sr=stage.getBoundingClientRect(),s=stage._s,r=fromEl.getBoundingClientRect(),bar=$('.screen.on .starbar');if(!bar)return;
   const br=bar.querySelector('img').getBoundingClientRect();
