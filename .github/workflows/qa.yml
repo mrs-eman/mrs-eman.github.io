@@ -1,0 +1,48 @@
+name: Check the site
+
+# Runs by itself every time a change is uploaded (pushed) to the site.
+# You can also run it by hand: Actions tab -> "Check the site" -> "Run workflow".
+on:
+  push:
+    branches: [main, master]
+    paths-ignore: ['.github/qa/README.md']
+  workflow_dispatch:
+
+concurrency:
+  group: site-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install the checking tools
+        run: |
+          pip install playwright pillow numpy
+          python -m playwright install --with-deps chromium
+
+      - name: Check every page like a child would
+        run: python .github/qa/qa_bot.py . qa-report
+
+      - name: Write the result on the summary page
+        if: always()
+        run: cat qa-report/summary.md >> "$GITHUB_STEP_SUMMARY" || echo "No report" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Keep the pictures of every screen
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-report
+          path: qa-report
+          retention-days: 14
