@@ -16,11 +16,11 @@ PORT = 8799
 BASE = f'http://127.0.0.1:{PORT}/'
 
 SIZES = {
-    'phone-land': (915, 412), 'phone-port': (390, 844), 'iphone': (393, 852),
+    'phone-land': (915, 412), 'samsung-phone': (800, 360), 'phone-port': (390, 844), 'iphone': (393, 852),
     'samsung-tab': (1280, 800), 'ipad': (820, 1180), 'laptop': (1440, 860),
 }
 LOAD_SIZES = ['phone-land', 'phone-port', 'samsung-tab', 'laptop']
-FLOW_SIZES = ['phone-land', 'phone-port', 'samsung-tab', 'ipad']
+FLOW_SIZES = ['phone-land', 'samsung-phone', 'phone-port', 'samsung-tab', 'ipad']
 if FAST:
     LOAD_SIZES = ['phone-land', 'phone-port']; FLOW_SIZES = ['phone-land', 'phone-port']
 IPHONE_UA = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1'
@@ -134,6 +134,9 @@ async def t_load(br, path, size, g):
     if R.err: msg.append('code error: ' + R.err[0])
     if R.bad: msg.append('missing: ' + ', '.join(sorted(set(R.bad))[:4]))
     if blank(s): msg.append('empty screen')
+    ov = await R.page.evaluate("""(()=>{const sel=['#homeb','.homeb','#navs2 .prev','#navs2 .next','.logo','.score','.sitehome','.starbar'];const els=[];sel.forEach(s=>document.querySelectorAll(s).forEach(e=>{const r=e.getBoundingClientRect(),cs=getComputedStyle(e);if(r.width>8&&r.height>8&&cs.visibility!=='hidden'&&cs.display!=='none'&&+cs.opacity>0.2&&r.top<140&&(()=>{const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return !!t&&(t===e||e.contains(t)||t.contains(e))})()&&!els.find(x=>x.e===e||x.e.contains(e)||e.contains(x.e)))els.push({e,r,n:s})}));const out=[];
+      for(let i=0;i<els.length;i++)for(let j=i+1;j<els.length;j++){const a=els[i].r,b=els[j].r,ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)),sm=Math.min(a.width*a.height,b.width*b.height);if(ix/sm>0.3)out.push(els[i].n+' over '+els[j].n)}return out})()""")
+    if ov: msg.append('top buttons on top of each other: ' + ', '.join(ov[:3]))
     lk = leak(R, g, path)
     if lk: msg.append(('girl-only' if g == 'boy' else 'boy-only') + ' files used (wrong picture, or missing when offline): ' + ', '.join(lk[:4]))
     add('Pages open', path, size, not msg, '; '.join(msg), s)
@@ -258,6 +261,13 @@ async def t_end(br, page, size):
     try:
         await pg.evaluate("(()=>{const r=document.getElementById('rvStart');if(r){r.remove();document.body.classList.remove('rvWait')}if(typeof start==='function')try{start()}catch(e){}})()")
     except Exception: pass
+    await pg.wait_for_timeout(1400)
+    msg = []
+    ov = await pg.evaluate("""(()=>{const sel=['#homeb','.homeb','#navs2 .prev','#navs2 .next','.logo','.score','.sitehome','.starbar'];const els=[];sel.forEach(s=>document.querySelectorAll(s).forEach(e=>{const r=e.getBoundingClientRect(),cs=getComputedStyle(e);if(r.width>8&&r.height>8&&cs.visibility!=='hidden'&&cs.display!=='none'&&+cs.opacity>0.2&&r.top<140&&(()=>{const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return !!t&&(t===e||e.contains(t)||t.contains(e))})()&&!els.find(x=>x.e===e||x.e.contains(e)||e.contains(x.e)))els.push({e,r,n:s})}));const out=[];
+      for(let i=0;i<els.length;i++)for(let j=i+1;j<els.length;j++){const a=els[i].r,b=els[j].r,ix=Math.max(0,Math.min(a.right,b.right)-Math.max(a.left,b.left))*Math.max(0,Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)),sm=Math.min(a.width*a.height,b.width*b.height);if(ix/sm>0.3)out.push(els[i].n+' over '+els[j].n)}return out})()""")
+    if ov: msg.append('top buttons on top of each other: ' + ', '.join(ov[:3]))
+    if msg: add('Top buttons', page + ' (while playing)', size, False, '; '.join(msg), await shot(R, f'top_{page}_{size}'))
+    else: add('Top buttons', page + ' (while playing)', size, True, '', None)
     await pg.wait_for_timeout(600)
     err = await pg.evaluate("(()=>{try{if(typeof finish==='function'&&!(window.CFG&&CFG.review))finish();else if(typeof reviewEnd==='function')reviewEnd();else return 'no end function';return ''}catch(e){return String(e)}})()")
     await pg.wait_for_timeout(2600)
@@ -273,6 +283,25 @@ async def t_end(br, page, size):
         lk = leak(R, g, page)
         if lk: msg.append('girl files: ' + ', '.join(lk[:4]))
     add('End screens', page, size, not msg, '; '.join(msg), s)
+    await R.ctx.close()
+
+
+# ---------- 4b. trace game end screen (games pages) ----------
+async def t_trace_end(br, page, size):
+    g = 'boy' if '_b' in page else 'girl'
+    R = await open_page(br, page, size, g); pg = R.page
+    await pg.wait_for_timeout(1200)
+    await pg.evaluate("document.querySelectorAll('#nameCard').forEach(e=>e.remove());try{start(3)}catch(e){}")
+    await pg.wait_for_timeout(800)
+    err = await pg.evaluate("(()=>{try{Math.random=()=>0.9;__traceEnd(3);return ''}catch(e){return String(e)}})()")
+    await pg.wait_for_timeout(1800)
+    s = await shot(R, f'traceend_{page}_{size}')
+    out = await in_view(R, '#tEnd .amz, #tEnd .stars img, #tEnd .again, #tEnd .home')
+    msg = []
+    if err: msg.append(err[:100])
+    if out: msg.append('cut off the screen: ' + '; '.join(out[:3]))
+    if R.err: msg.append('code error: ' + R.err[0])
+    add('End screens', page + ' (trace the letter)', size, not msg, '; '.join(msg), s)
     await R.ctx.close()
 
 # ---------- 5. worksheets: stamp + microphone message ----------
@@ -382,6 +411,9 @@ async def main():
                     for sfx in ('', '_b'):
                         f = f'{kind}{n}{sfx}.html'
                         if os.path.exists(os.path.join(ROOT, f)): T.append(job(t_end, br, f, size))
+            for n in range(1, 6):
+                for sfx in ('', '_b'):
+                    if os.path.exists(os.path.join(ROOT, f'games{n}{sfx}.html')): T.append(job(t_trace_end, br, f'games{n}{sfx}.html', size))
             for n in range(1, 6):
                 for sfx in ('', '_b'):
                     f = f'ws{n}/index{sfx}.html'
